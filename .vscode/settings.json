@@ -5,7 +5,8 @@
     "[go][go.mod][golang]": {
         "editor.codeActionsOnSave": { "source.organizeImports": "explicit" },
         "editor.defaultFormatter": "golang.go",
-        "editor.insertSpaces": false
+        "editor.insertSpaces": false,
+        "editor.rulers": [100]
     },
     "go.useLanguageServer": true,
     "gopls": { "formatting.gofumpt": true },
@@ -18,5 +19,11 @@
         "prettier.useTabs": false
     },
 
-    "cSpell.words": ["htmlnodes", "testcache", "textnodes"]
+    "cSpell.words": [
+        "htmlnodes",
+        "submatch",
+        "submatches",
+        "testcache",
+        "textnodes"
+    ]
 }
