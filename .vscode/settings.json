@@ -1,0 +1,22 @@
+{
+    "editor.rulers": [80, 100],
+    "editor.tabSize": 4,
+
+    "[go][go.mod][golang]": {
+        "editor.codeActionsOnSave": { "source.organizeImports": "explicit" },
+        "editor.defaultFormatter": "golang.go",
+        "editor.insertSpaces": false
+    },
+    "go.useLanguageServer": true,
+    "gopls": { "formatting.gofumpt": true },
+
+    "[html][css][json][jsonc]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.insertSpaces": true,
+        "prettier.printWidth": 80,
+        "prettier.tabWidth": 4,
+        "prettier.useTabs": false
+    },
+
+    "cSpell.words": ["htmlnodes", "testcache", "textnodes"]
+}
