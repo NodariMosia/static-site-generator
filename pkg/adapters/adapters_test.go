@@ -126,3 +126,69 @@ func TestTextNodeToHTMLNode(t *testing.T) {
 		})
 	}
 }
+
+func TestMarkdownToHTMLNode(t *testing.T) {
+	tests := []struct {
+		name     string
+		markdown string
+		wantHTML string
+		wantErr  error
+	}{
+		{
+			name:     "shouldFormatParagraph",
+			markdown: "\nThis is **bolded** paragraph\ntext in a p\ntag here\n\n",
+			wantHTML: "<div><p>This is <b>bolded</b> paragraph text in a p tag here</p></div>",
+			wantErr:  nil,
+		},
+		{
+			name:     "shouldFormatParagraphs",
+			markdown: "\nThis is **bolded** paragraph\ntext in a p\ntag here\n\nThis is another paragraph with *italic* text and `code` here\n\n",
+			wantHTML: "<div><p>This is <b>bolded</b> paragraph text in a p tag here</p><p>This is another paragraph with <i>italic</i> text and <code>code</code> here</p></div>",
+			wantErr:  nil,
+		},
+		{
+			name:     "shouldFormatHeadings",
+			markdown: "\n# this is an h1\n\nthis is paragraph text\n\n## this is an h2\n\n",
+			wantHTML: "<div><h1>this is an h1</h1><p>this is paragraph text</p><h2>this is an h2</h2></div>",
+			wantErr:  nil,
+		},
+		{
+			name:     "shouldFormatBlockquote",
+			markdown: "\n> This is a\n> blockquote block\n\nthis is paragraph text\n\n",
+			wantHTML: "<div><blockquote>This is a blockquote block</blockquote><p>this is paragraph text</p></div>",
+			wantErr:  nil,
+		},
+		{
+			name:     "shouldFormatCode",
+			markdown: "\n```This is a\n    code block\n```\n\n\nthis is paragraph text\n\n",
+			wantHTML: "<div><pre><code>This is a\n    code block\n</code></pre><p>this is paragraph text</p></div>",
+			wantErr:  nil,
+		},
+		{
+			name:     "shouldFormatLists",
+			markdown: "\n- This is a list\n- with items\n- and *more* items\n\n1. This is an `ordered` list\n2. with items\n3. and more items\n\n",
+			wantHTML: "<div><ul><li>This is a list</li><li>with items</li><li>and <i>more</i> items</li></ul><ol><li>This is an <code>ordered</code> list</li><li>with items</li><li>and more items</li></ol></div>",
+			wantErr:  nil,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			node, gotErr := MarkdownToHTMLNode(tt.markdown)
+			if !errors.Is(gotErr, tt.wantErr) {
+				t.Errorf(
+					"MarkdownToHTMLNode(%s) = (_, %v), want (_, %v)",
+					tt.markdown, gotErr, tt.wantErr,
+				)
+			}
+
+			gotHTML, err := node.ToHTML()
+			if gotHTML != tt.wantHTML || err != nil {
+				t.Errorf(
+					"MarkdownToHTMLNode(%s) = (%v, _), want (%v, _)\nRoot node: %v",
+					tt.markdown, gotHTML, tt.wantHTML, node,
+				)
+			}
+		})
+	}
+}

@@ -16,19 +16,32 @@ func MarkdownToBlocks(markdown string) []string {
 	blocks := []string{}
 	var sb strings.Builder
 
+	shouldPreserveWhitespace := false
+
 	for _, line := range lines {
-		if line != "" {
+		if !shouldPreserveWhitespace && strings.HasPrefix(line, "```") {
+			shouldPreserveWhitespace = true
+		} else if shouldPreserveWhitespace && strings.HasSuffix(line, "```") {
+			shouldPreserveWhitespace = false
+		}
+
+		if line == "" && !shouldPreserveWhitespace {
 			if sb.Len() != 0 {
-				sb.WriteByte('\n')
+				blocks = append(blocks, sb.String())
+				sb.Reset()
 			}
 
-			sb.WriteString(strings.TrimSpace(line))
 			continue
 		}
 
 		if sb.Len() != 0 {
-			blocks = append(blocks, sb.String())
-			sb.Reset()
+			sb.WriteByte('\n')
+		}
+
+		if shouldPreserveWhitespace {
+			sb.WriteString(line)
+		} else {
+			sb.WriteString(strings.TrimSpace(line))
 		}
 	}
 
