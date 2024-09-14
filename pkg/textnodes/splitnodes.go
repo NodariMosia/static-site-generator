@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"strings"
 
-	"static-site-generator/pkg/utils"
+	"static-site-generator/pkg/markdown"
 )
 
-func SplitNodesByDelimiter(nodes []*TextNode, delimiter, textType string) ([]*TextNode, error) {
+func SplitNodesByDelimiter(nodes []*TextNode, delimiter string, textType TextNodeType) ([]*TextNode, error) {
 	if len(nodes) == 0 || delimiter == "" {
 		return nodes, nil
 	}
@@ -50,7 +50,7 @@ func SplitNodesByDelimiter(nodes []*TextNode, delimiter, textType string) ([]*Te
 func SplitNodesByImages(nodes []*TextNode) []*TextNode {
 	return splitNodesByTextUrlPairs(
 		nodes,
-		utils.ExtractMarkdownImages,
+		markdown.ExtractMarkdownImages,
 		"![%s](%s)",
 		TEXT_NODE_TYPE_IMAGE,
 	)
@@ -59,7 +59,7 @@ func SplitNodesByImages(nodes []*TextNode) []*TextNode {
 func SplitNodesByLinks(nodes []*TextNode) []*TextNode {
 	return splitNodesByTextUrlPairs(
 		nodes,
-		utils.ExtractMarkdownLinks,
+		markdown.ExtractMarkdownLinks,
 		"[%s](%s)",
 		TEXT_NODE_TYPE_LINK,
 	)
@@ -67,9 +67,9 @@ func SplitNodesByLinks(nodes []*TextNode) []*TextNode {
 
 func splitNodesByTextUrlPairs(
 	nodes []*TextNode,
-	markdownTextUrlPairExtractor func(text string) []utils.MarkdownTextUrlPair,
+	markdownTextUrlPairExtractor func(text string) []markdown.MarkdownTextUrlPair,
 	markdownTextUrlPairFormat string,
-	textType string,
+	textType TextNodeType,
 ) []*TextNode {
 	if len(nodes) == 0 {
 		return nodes

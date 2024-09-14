@@ -4,11 +4,11 @@ import "fmt"
 
 type TextNode struct {
 	Text     string
-	TextType string
+	TextType TextNodeType
 	Url      string
 }
 
-func NewTextNode(text, textType, url string) *TextNode {
+func NewTextNode(text string, textType TextNodeType, url string) *TextNode {
 	return &TextNode{text, textType, url}
 }
 

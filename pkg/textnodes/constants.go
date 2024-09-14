@@ -2,13 +2,15 @@ package textnodes
 
 import "errors"
 
+type TextNodeType string
+
 const (
-	TEXT_NODE_TYPE_TEXT   = "text"
-	TEXT_NODE_TYPE_BOLD   = "bold"
-	TEXT_NODE_TYPE_ITALIC = "italic"
-	TEXT_NODE_TYPE_CODE   = "code"
-	TEXT_NODE_TYPE_LINK   = "link"
-	TEXT_NODE_TYPE_IMAGE  = "image"
+	TEXT_NODE_TYPE_TEXT   TextNodeType = "text"
+	TEXT_NODE_TYPE_BOLD   TextNodeType = "bold"
+	TEXT_NODE_TYPE_ITALIC TextNodeType = "italic"
+	TEXT_NODE_TYPE_CODE   TextNodeType = "code"
+	TEXT_NODE_TYPE_LINK   TextNodeType = "link"
+	TEXT_NODE_TYPE_IMAGE  TextNodeType = "image"
 )
 
 var (

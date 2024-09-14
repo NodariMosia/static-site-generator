@@ -12,7 +12,7 @@ func TestSplitNodesByDelimiter(t *testing.T) {
 		name      string
 		nodes     []*TextNode
 		delimiter string
-		textType  string
+		textType  TextNodeType
 		wantStr   string
 		wantErr   error
 	}{
