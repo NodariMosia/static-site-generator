@@ -3,7 +3,7 @@
 **Generate static `HTML` pages from `Markdown` files.**
 
 This project is inspired by [boot.dev](https://www.boot.dev)'s [Build a Static Site Generator](https://www.boot.dev/courses/build-static-site-generator) course that builds the SSG in Python.
-Currently, files in `./content` directory are copied from that course.
+Currently, files in `./content` directory, `./static/images/rivendell.png` and `./static/index.css` files are copied from that course.
 
 ## How to use
 
