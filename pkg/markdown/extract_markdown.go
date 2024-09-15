@@ -1,6 +1,11 @@
 package markdown
 
-import "regexp"
+import (
+	"bufio"
+	"fmt"
+	"regexp"
+	"strings"
+)
 
 var (
 	markdownImagesRegexp = regexp.MustCompile(`!\[(.*?)\]\((.*?)\)`)
@@ -40,4 +45,22 @@ func ExtractMarkdownLinks(text string) []MarkdownTextUrlPair {
 	}
 
 	return result
+}
+
+func ExtractMarkdownTitle(markdown string) (string, error) {
+	scanner := bufio.NewScanner(strings.NewReader(markdown))
+
+	for scanner.Scan() {
+		lineBytes := scanner.Bytes()
+
+		if len(lineBytes) > 2 && lineBytes[0] == '#' && lineBytes[1] == ' ' {
+			return strings.TrimSpace(string(lineBytes[2:])), nil
+		}
+	}
+
+	if err := scanner.Err(); err != nil {
+		return "", fmt.Errorf("error occurred while extracting markdown title: %v", err)
+	}
+
+	return "", ErrMissingMarkdownTitle
 }

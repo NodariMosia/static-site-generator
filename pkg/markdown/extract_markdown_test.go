@@ -1,6 +1,7 @@
 package markdown
 
 import (
+	"errors"
 	"reflect"
 	"testing"
 )
@@ -70,6 +71,53 @@ func TestExtractMarkdownLinks(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := ExtractMarkdownLinks(tt.text); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("ExtractMarkdownLinks() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestExtractMarkdownTitle(t *testing.T) {
+	tests := []struct {
+		name      string
+		markdown  string
+		wantTitle string
+		wantErr   error
+	}{
+		{
+			name:      "shouldExtractTitleFromSingleLineMarkdown",
+			markdown:  "# Hello world!",
+			wantTitle: "Hello world!",
+			wantErr:   nil,
+		},
+		{
+			name:      "shouldExtractTitleFromMultilineMarkdown",
+			markdown:  "## This\n#should be extracted\n# Hello world!\n> from multiline",
+			wantTitle: "Hello world!",
+			wantErr:   nil,
+		},
+		{
+			name:      "shouldExtractAndTrimTitle",
+			markdown:  "## This\n#should be trimmed\n#  \tHello world!\t\t \n# Second title\n\n",
+			wantTitle: "Hello world!",
+			wantErr:   nil,
+		},
+		{
+			name:      "shouldReturnErrMissingMarkdownTitle",
+			markdown:  "## This text\n#doesn't have\n#\tany valid\ntitles\n#\n# \n\n## \n",
+			wantTitle: "",
+			wantErr:   ErrMissingMarkdownTitle,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			gotTitle, gotErr := ExtractMarkdownTitle(tt.markdown)
+
+			if gotTitle != tt.wantTitle || !errors.Is(gotErr, tt.wantErr) {
+				t.Errorf(
+					"ExtractMarkdownTitle() = (%s, %v), want (%s, %v)",
+					gotTitle, gotErr, tt.wantTitle, tt.wantErr,
+				)
 			}
 		})
 	}

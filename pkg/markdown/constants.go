@@ -1,5 +1,7 @@
 package markdown
 
+import "errors"
+
 type MarkdownBlockType string
 
 const (
@@ -10,3 +12,5 @@ const (
 	MARKDOWN_BLOCK_TYPE_UNORDERED_LIST MarkdownBlockType = "unordered_list"
 	MARKDOWN_BLOCK_TYPE_ORDERED_LIST   MarkdownBlockType = "ordered_list"
 )
+
+var ErrMissingMarkdownTitle = errors.New("no title found in markdown")
