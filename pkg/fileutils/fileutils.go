@@ -1,7 +1,9 @@
 package fileutils
 
 import (
+	"errors"
 	"fmt"
+	"io/fs"
 	"os"
 	"path"
 )
@@ -18,7 +20,7 @@ func CleanAndCopyFromSourceDirToDestinationDir(sourceDir, destinationDir string)
 func deleteContentsOfDestinationDir(destinationDir string) error {
 	dirEntries, err := os.ReadDir(destinationDir)
 	if err != nil {
-		if os.IsNotExist(err) {
+		if errors.Is(err, fs.ErrNotExist) {
 			return createDestinationDir(destinationDir)
 		}
 		return fmt.Errorf("failed to read %s directory: %v", destinationDir, err)
