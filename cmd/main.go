@@ -8,19 +8,18 @@ import (
 
 func main() {
 	const (
-		sourceDir      = "./static"
+		staticDir      = "./static"
+		contentDir     = "./content"
 		destinationDir = "./public"
 
-		sourcePath      = "./content/index.md"
-		templatePath    = "./template.html"
-		destinationPath = "./public/index.html"
+		templatePath = "./template.html"
 
 		serverPort = ":8888"
 	)
 
-	panicIfError(fileutils.CleanAndCopyFromSourceDirToDestinationDir(sourceDir, destinationDir))
+	panicIfError(fileutils.CleanAndCopyFromSourceDirToDestinationDir(staticDir, destinationDir))
 
-	panicIfError(generator.GeneratePage(sourcePath, templatePath, destinationPath))
+	panicIfError(generator.GeneratePagesRecursive(contentDir, templatePath, destinationDir))
 
 	panicIfError(server.ServeDir(destinationDir, serverPort))
 }

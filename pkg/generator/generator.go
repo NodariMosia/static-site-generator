@@ -10,6 +10,44 @@ import (
 	"static-site-generator/pkg/markdown"
 )
 
+func GeneratePagesRecursive(contentDir, templatePath, destinationDir string) error {
+	fmt.Println("Generating pages...")
+
+	handleWalkDirEntry := func(path string, entry os.DirEntry, err error) error {
+		if err != nil {
+			return err
+		}
+
+		if entry.IsDir() {
+			return nil
+		}
+
+		if !strings.HasSuffix(entry.Name(), ".md") {
+			return nil
+		}
+
+		relativePath, err := filepath.Rel(contentDir, path)
+		if err != nil {
+			return err
+		}
+
+		destinationPath := filepath.Join(destinationDir, relativePath)
+		destinationPath = strings.TrimSuffix(destinationPath, ".md")
+		destinationPath += ".html"
+
+		return GeneratePage(path, templatePath, destinationPath)
+	}
+
+	err := filepath.WalkDir(contentDir, handleWalkDirEntry)
+	if err != nil {
+		return fmt.Errorf("generating pages failed: %v", err)
+	}
+
+	fmt.Println("Generated pages successfully!")
+
+	return nil
+}
+
 func GeneratePage(sourcePath, templatePath, destinationPath string) error {
 	fmt.Printf(
 		"Generating page from source (%s) to destination (%s) using template (%s)...\n",
