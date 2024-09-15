@@ -1,5 +1,7 @@
 # Tolkien Fan Club
 
+**DISCLAIMER:** This project is inspired by [boot.dev](https://www.boot.dev)'s [Build a Static Site Generator](https://www.boot.dev/courses/build-static-site-generator) course that builds the SSG in Python. This file is copied from that course.
+
 **I like Tolkien**. Read my [first post here](/majesty)
 
 > All that is gold does not glitter

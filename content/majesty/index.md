@@ -1,5 +1,7 @@
 # The Unparalleled Majesty of "The Lord of the Rings"
 
+**DISCLAIMER:** This project is inspired by [boot.dev](https://www.boot.dev)'s [Build a Static Site Generator](https://www.boot.dev/courses/build-static-site-generator) course that builds the SSG in Python. This file is copied from that course.
+
 [Back Home](/)
 
 ![LOTR image artistmonkeys](/images/rivendell.png)
