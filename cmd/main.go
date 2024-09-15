@@ -1,12 +1,15 @@
 package main
 
-import (
-	"fmt"
+import "static-site-generator/pkg/fileutils"
 
-	"static-site-generator/pkg/textnodes"
+const (
+	sourceDir      = "./static"
+	destinationDir = "./public"
 )
 
 func main() {
-	textNode := textnodes.NewTextNode("This is a text node", "bold", "https://www.boot.dev")
-	fmt.Println(textNode)
+	err := fileutils.CleanAndCopyFromSourceDirToDestinationDir(sourceDir, destinationDir)
+	if err != nil {
+		panic(err)
+	}
 }
