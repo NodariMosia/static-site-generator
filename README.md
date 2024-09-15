@@ -68,3 +68,17 @@ Currently, files in `./content` directory, `./static/images/rivendell.png` and `
   8. Generates `HTML` string by parsing previously created `HTMLNode` node tree;
   9. Replaces content placeholder ( ***`{{ Content }}`*** ) in template with generated html code;
   10. Writes final `HTML` string to the file in `./public` directory with the same name and directory structure as its source file.
+
+## Testing
+
+There are tests available for every module that doesn't interact with file system.
+
+Tests can be run by:
+
+```bash
+./test.sh
+# or
+make test
+# or
+go clean -testcache && go test ./...
+```
