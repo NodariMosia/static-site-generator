@@ -160,7 +160,7 @@ func TestMarkdownToHTMLNode(t *testing.T) {
 		},
 		{
 			name:     "shouldFormatCode",
-			markdown: "\n```This is a\n    code block\n```\n\n\nthis is paragraph text\n\n",
+			markdown: "\n```\nThis is a\n    code block\n```\n\n\nthis is paragraph text\n\n",
 			wantHTML: "<div><pre><code>This is a\n    code block\n</code></pre><p>this is paragraph text</p></div>",
 			wantErr:  nil,
 		},

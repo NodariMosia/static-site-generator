@@ -127,6 +127,7 @@ func headingBlockToHTMLNode(block string) (hn.HTMLStringer, error) {
 
 func codeBlockToHTMLNode(block string) (hn.HTMLStringer, error) {
 	block = strings.TrimPrefix(block, "```")
+	block = strings.TrimPrefix(block, "\n")
 	block = strings.TrimSuffix(block, "```")
 
 	children, err := inlineTextToHTMLNodes(block)
