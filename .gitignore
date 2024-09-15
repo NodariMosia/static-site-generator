@@ -19,5 +19,8 @@ tmp/
 # Go workspace file
 go.work
 
+# Generated files
+public/
+
 # Misc
 .DS_STORE
