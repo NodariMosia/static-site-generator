@@ -130,12 +130,7 @@ func codeBlockToHTMLNode(block string) (hn.HTMLStringer, error) {
 	block = strings.TrimPrefix(block, "\n")
 	block = strings.TrimSuffix(block, "```")
 
-	children, err := inlineTextToHTMLNodes(block)
-	if err != nil {
-		return nil, err
-	}
-
-	codeNode, err := hn.NewParentNode("code", children, map[string]string{})
+	codeNode, err := hn.NewLeafNode("code", block, map[string]string{})
 	if err != nil {
 		return nil, err
 	}
