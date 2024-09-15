@@ -6,17 +6,17 @@ import (
 	"static-site-generator/pkg/server"
 )
 
+const (
+	staticDir      = "./static"
+	contentDir     = "./content"
+	destinationDir = "./public"
+
+	templatePath = "./template.html"
+
+	serverPort = ":8888"
+)
+
 func main() {
-	const (
-		staticDir      = "./static"
-		contentDir     = "./content"
-		destinationDir = "./public"
-
-		templatePath = "./template.html"
-
-		serverPort = ":8888"
-	)
-
 	panicIfError(fileutils.CleanAndCopyFromSourceDirToDestinationDir(staticDir, destinationDir))
 
 	panicIfError(generator.GeneratePagesRecursive(contentDir, templatePath, destinationDir))
