@@ -1,5 +1,5 @@
 {
-    "editor.rulers": [80, 100],
+    "editor.rulers": [100],
     "editor.tabSize": 4,
 
     "[go][go.mod][golang]": {
@@ -14,16 +14,28 @@
     "[html][css][json][jsonc]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode",
         "editor.insertSpaces": true,
-        "prettier.printWidth": 80,
+        "prettier.printWidth": 100,
         "prettier.tabWidth": 4,
         "prettier.useTabs": false
     },
 
-    "cSpell.words": [
-        "htmlnodes",
-        "submatch",
-        "submatches",
-        "testcache",
-        "textnodes"
-    ]
+    "[markdown]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
+    },
+    "markdownlint.config": {
+        "ul-style": { "style": "asterisk" },
+        "no-hard-tabs": { "code_blocks": false },
+        "no-duplicate-heading": { "siblings_only": true },
+        "no-trailing-punctuation": false,
+        "fenced-code-language": false,
+        "proper-names": false,
+        "code-block-style": { "style": "fenced" },
+        "code-fence-style": { "style": "backtick" },
+        "emphasis-style": { "style": "asterisk" },
+        "strong-style": { "style": "asterisk" },
+        "table-pipe-style": { "style": "leading_and_trailing" }
+    },
+
+    "cSpell.words": ["fileutils", "htmlnodes", "submatch", "submatches", "testcache", "textnodes"]
 }
