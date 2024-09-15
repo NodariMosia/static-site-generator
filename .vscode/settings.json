@@ -24,7 +24,7 @@
         "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
     },
     "markdownlint.config": {
-        "ul-style": { "style": "asterisk" },
+        "ul-style": { "style": "consistent" },
         "no-hard-tabs": { "code_blocks": false },
         "no-duplicate-heading": { "siblings_only": true },
         "no-trailing-punctuation": false,
